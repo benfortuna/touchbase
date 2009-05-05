@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.mnode.touchbase</groupId>
+  <artifactId>org.mnode.touchbase.im</artifactId>
+  <packaging>bundle</packaging>
+  <name>Touchbase IM</name>
+  <version>0.0.1-SNAPSHOT</version>
+  <description>Instant messaging support</description>
+  <parent>
+  	<artifactId>base-modules</artifactId>
+  	<groupId>org.mnode.base</groupId>
+  	<version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.mnode.base</groupId>
+  		<artifactId>org.mnode.base.views</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<scope>provided</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.mnode.base</groupId>
+  		<artifactId>org.mnode.base.xmpp</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<scope>provided</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.mnode.base</groupId>
+  		<artifactId>org.mnode.base.cache</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<scope>provided</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>commons-lang</groupId>
+  		<artifactId>commons-lang</artifactId>
+  		<version>2.4</version>
+  	</dependency>
+  </dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<version>1.4.0</version>
+				<configuration>
+					<manifestLocation>${project.build.directory}/META-INF</manifestLocation>
+					<instructions>
+						<Export-Package>org.mnode.touchbase.im</Export-Package>
+						<Import-Package>org.springframework.cache.ehcache,*</Import-Package>
+						<Private-Package>org.mnode.touchbase.im.action,org.apache.commons.lang*</Private-Package>
+						<!-- embed all compile and runtime scope dependencies -->
+						<!--
+							<Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
+						-->
+						<Embed-Transitive>true</Embed-Transitive>
+						<!--
+							add ,plugin.xml if it's present i.e.
+							src/main/resources,plugin.xml
+						-->
+						<Include-Resource>src/main/resources</Include-Resource>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
