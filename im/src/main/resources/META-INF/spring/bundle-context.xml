@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!--
+		regular spring configuration file defining the beans for this bundle.
+		The configuration of OSGi definitions is kept in a separate
+		configuration file so that this file can easily be used for
+		integration testing outside of an OSGi environment
+	-->
+	<bean name="ChatView" class="org.mnode.touchbase.im.ChatView"
+		depends-on="EditStatusBusy, EditStatusInvisible, ChatCloseTab, ChatCloseOtherTabs, ChatCloseAllTabs, ChatViewStatusBar, NewConnection">
+		<constructor-arg index="0">
+			<ref bean="chatContextManager" />
+		</constructor-arg>
+		<constructor-arg index="1">
+			<ref bean="vcardCache" />
+		</constructor-arg>
+	</bean>
+	<bean name="ChatFrame" class="org.mnode.touchbase.im.ChatFrame">
+		<constructor-arg index="0">
+			<ref bean="ChatView" />
+		</constructor-arg>
+	</bean>
+	<bean name="vcardCache" class="org.mnode.touchbase.im.VCardCache">
+		<constructor-arg index="0">
+			<ref bean="cache" />
+		</constructor-arg>
+	</bean>
+	<bean name="fileReceiver" class="org.mnode.touchbase.im.FileReceiver"/>
+	
+	<!-- Actions -->
+	<bean name="CloseChatView" class="org.mnode.touchbase.im.action.CloseChatView">
+		<constructor-arg index="0">
+			<value>chatView.close</value>
+		</constructor-arg>
+		<property name="chatFrame">
+			<ref bean="ChatFrame" />
+		</property>
+	</bean>
+	<bean name="OpenChatView" class="org.mnode.touchbase.im.action.OpenChatView">
+		<constructor-arg index="0">
+			<value>chat</value>
+		</constructor-arg>
+		<property name="chatFrame">
+			<ref bean="ChatFrame" />
+		</property>
+	</bean>
+	<bean name="ChatCloseTab" class="org.mnode.base.views.action.CloseTab">
+		<constructor-arg index="0">
+			<value>chat.closeTab</value>
+		</constructor-arg>
+	</bean>
+	<bean name="ChatCloseOtherTabs" class="org.mnode.base.views.action.CloseOtherTabs">
+		<constructor-arg index="0">
+			<value>chat.closeOtherTabs</value>
+		</constructor-arg>
+	</bean>
+	<bean name="ChatCloseAllTabs" class="org.mnode.base.views.action.CloseAllTabs">
+		<constructor-arg index="0">
+			<value>chat.closeAllTabs</value>
+		</constructor-arg>
+	</bean>
+	<bean name="ChatViewStatusBar" class="org.mnode.base.views.action.ShowStatusBarAction">
+		<constructor-arg index="0">
+			<value>chat.viewStatusBar</value>
+		</constructor-arg>
+	</bean>
+	<bean name="EditStatusBusy" class="org.mnode.touchbase.im.action.EditStatusBusy">
+		<constructor-arg index="0">
+			<value>editStatusBusy</value>
+		</constructor-arg>
+	</bean>
+	<bean name="EditStatusInvisible" class="org.mnode.touchbase.im.action.EditStatusInvisible">
+		<constructor-arg index="0">
+			<value>editStatusInvisible</value>
+		</constructor-arg>
+	</bean>
+	<bean name="NewConnection" class="org.mnode.touchbase.im.action.NewConnection">
+		<constructor-arg index="0">
+			<value>newConnection</value>
+		</constructor-arg>
+	</bean>
+    <bean name="SendFile" class="org.mnode.touchbase.im.action.SendFile">
+        <constructor-arg index="0">
+            <value>sendFile</value>
+        </constructor-arg>
+        <property name="contactStore">
+            <ref bean="ConnectionManager" />
+        </property>
+    </bean>
+    <bean name="ContactDetails" class="org.mnode.touchbase.im.action.ContactDetails">
+        <constructor-arg index="0">
+            <value>contactList.details</value>
+        </constructor-arg>
+        <property name="connectionManager">
+            <ref bean="ConnectionManager" />
+        </property>
+        <property name="cardCache">
+            <ref bean="vcardCache" />
+        </property>
+    </bean>
+
+    <bean name="ContactListCall" class="org.mnode.touchbase.im.action.CallContact">
+        <constructor-arg index="0">
+            <value>contactList.call</value>
+        </constructor-arg>
+    </bean>
+	
+	<bean id="cache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager">
+			<ref bean="cacheManager" />
+		</property>
+		<property name="cacheName">
+			<value>VCARD</value>
+		</property>
+	</bean>
+	<bean name="IdleTime" class="org.mnode.touchbase.im.IdleTime" />
+	<bean name="ConnectionManager" class="org.mnode.touchbase.im.XMPPConnectionManager" />
+	<bean name="ContactsView" class="org.mnode.touchbase.im.ContactsView" depends-on="ContactDetails, ContactListCall">
+		<constructor-arg index="0">
+			<ref bean="ConnectionManager" />
+		</constructor-arg>
+	</bean>
+</beans>
