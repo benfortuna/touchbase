@@ -243,7 +243,7 @@ public class ContactsView extends AbstractView {
 //		                cellHasFocus);
 //		    }
 //		});
-		contactList.setCellRenderer(new ContactListCellRenderer());
+		contactList.setCellRenderer(new ContactListCellRenderer(contactStore));
 //		contactList.setAutoscrolls(true);
 //		contactList.addMouseMotionListener(new MouseMotionAdapter() {
 //		    @Override

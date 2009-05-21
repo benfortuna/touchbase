@@ -19,6 +19,7 @@ public class XMPPConnectionManager implements ConnectionCreationListener {
 	public XMPPConnectionManager() {
 		connections = new ArrayList<XMPPConnection>();
 		rosterListeners = new ArrayList<RosterListener>();
+		XMPPConnection.addConnectionCreationListener(this);
 	}
 
 	/**
