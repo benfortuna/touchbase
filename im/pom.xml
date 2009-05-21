@@ -14,19 +14,19 @@
   <dependencies>
   	<dependency>
   		<groupId>org.mnode.base</groupId>
-  		<artifactId>org.mnode.base.views</artifactId>
+  		<artifactId>base-views</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   		<scope>provided</scope>
   	</dependency>
   	<dependency>
   		<groupId>org.mnode.base</groupId>
-  		<artifactId>org.mnode.base.xmpp</artifactId>
+  		<artifactId>base-xmpp</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   		<scope>provided</scope>
   	</dependency>
   	<dependency>
   		<groupId>org.mnode.base</groupId>
-  		<artifactId>org.mnode.base.cache</artifactId>
+  		<artifactId>base-cache</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   		<scope>provided</scope>
   	</dependency>
@@ -34,6 +34,7 @@
   		<groupId>commons-lang</groupId>
   		<artifactId>commons-lang</artifactId>
   		<version>2.4</version>
+  		<scope>provided</scope>
   	</dependency>
   </dependencies>
   <scm>
@@ -54,7 +55,7 @@
 					<instructions>
 						<Export-Package>org.mnode.touchbase.im</Export-Package>
 						<Import-Package>org.springframework.cache.ehcache,*</Import-Package>
-						<Private-Package>org.mnode.touchbase.im.action,org.apache.commons.lang*</Private-Package>
+						<Private-Package>org.mnode.touchbase.im.action</Private-Package>
 						<!-- embed all compile and runtime scope dependencies -->
 						<!--
 							<Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
