@@ -1,5 +1,7 @@
 package org.mnode.touchbase.im.integration;
 
+import javax.swing.UIManager;
+
 import org.jdesktop.swingx.JXFrame;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
@@ -12,6 +14,12 @@ import org.springframework.osgi.test.platform.Platforms;
 public class ChatFrameTest extends AbstractConfigurableBundleCreatorTests {
 	
 	public void testGetChatFrame() throws XMPPException {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
 		ServiceTracker contactsViewTracker = new ServiceTracker(bundleContext, ContactsView.class.getName(), null);
 		contactsViewTracker.open();
@@ -19,6 +27,7 @@ public class ChatFrameTest extends AbstractConfigurableBundleCreatorTests {
 		assertNotNull(contactsView);
 		JXFrame contactsFrame = new JXFrame("Contacts");
 		contactsFrame.add(contactsView);
+		contactsFrame.pack();
 		contactsFrame.setVisible(true);
 
 		ServiceTracker chatFrameTracker = new ServiceTracker(bundleContext, ChatFrame.class.getName(), null);
@@ -36,12 +45,13 @@ public class ChatFrameTest extends AbstractConfigurableBundleCreatorTests {
 	
 	@Override
 	protected final String[] getTestBundlesNames() {
-		return new String[] { "org.mnode.touchbase, org.mnode.touchbase.im, 0.0.1-SNAPSHOT",
-				"org.mnode.base, org.mnode.base.xmpp, 0.0.1-SNAPSHOT",
-				"org.mnode.base, org.mnode.base.views, 0.0.1-SNAPSHOT",
-				"org.mnode.base, org.mnode.base.cache, 0.0.1-SNAPSHOT",
+		return new String[] { "org.mnode.touchbase, im, 0.0.1-SNAPSHOT",
+				"org.mnode.base, base-xmpp, 0.0.1-SNAPSHOT",
+				"org.mnode.base, base-views, 0.0.1-SNAPSHOT",
+				"org.mnode.base, base-cache, 0.0.1-SNAPSHOT",
 				"org.springframework, spring-context-support, 2.5.5",
-				"net.sourceforge.cglib, com.springsource.net.sf.cglib, 2.1.3"
+				"net.sourceforge.cglib, com.springsource.net.sf.cglib, 2.1.3",
+				"commons-lang, commons-lang, 2.4"
 			};
 	}
 
