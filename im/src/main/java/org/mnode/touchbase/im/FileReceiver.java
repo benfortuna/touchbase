@@ -13,27 +13,40 @@ import org.jivesoftware.smackx.filetransfer.FileTransferListener;
 import org.jivesoftware.smackx.filetransfer.FileTransferRequest;
 import org.jivesoftware.smackx.filetransfer.IncomingFileTransfer;
 
+/**
+ * Manages receipt of transferred files.
+ * 
+ * @author fortuna
+ * 
+ */
 public class FileReceiver implements FileTransferListener {
-    
+
     private JFileChooser acceptFileChooser;
-    
+
     private Component parent;
 
+    /**
+     * 
+     */
     public FileReceiver() {
         acceptFileChooser = new JFileChooser();
     }
-    
-	@Override
-	public void fileTransferRequest(final FileTransferRequest request) {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void fileTransferRequest(final FileTransferRequest request) {
         if (JOptionPane.showConfirmDialog(parent, "Accept file from " + request.getRequestor() + "?",
                 "Incoming File Transfer", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            
+
             acceptFileChooser.setSelectedFile(new File(acceptFileChooser.getCurrentDirectory(), request.getFileName()));
             if (acceptFileChooser.showSaveDialog(parent) == JFileChooser.APPROVE_OPTION) {
                 SwingWorker<String, Object> acceptFileWorker = new SwingWorker<String, Object>() {
                     @Override
                     protected String doInBackground() throws Exception {
-                        ProgressMonitor monitor = new ProgressMonitor(parent, "Receiving file [" + request.getFileName() + "]", null, 0, 100);
+                        ProgressMonitor monitor = new ProgressMonitor(parent, "Receiving file ["
+                                + request.getFileName() + "]", null, 0, 100);
                         IncomingFileTransfer ift = request.accept();
                         try {
                             ift.recieveFile(acceptFileChooser.getSelectedFile());
@@ -41,7 +54,7 @@ public class FileReceiver implements FileTransferListener {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
-                        
+
                         while (!ift.isDone()) {
                             if (monitor.isCanceled()) {
                                 ift.cancel();
@@ -62,7 +75,7 @@ public class FileReceiver implements FileTransferListener {
                 acceptFileWorker.execute();
             }
         }
-	}
+    }
 
     /**
      * @return the parent
@@ -72,7 +85,8 @@ public class FileReceiver implements FileTransferListener {
     }
 
     /**
-     * @param parent the parent to set
+     * @param parent
+     *            the parent to set
      */
     public final void setParent(Component parent) {
         this.parent = parent;

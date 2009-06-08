@@ -35,7 +35,7 @@ public class ChatFrame extends ViewFrame<ChatView> {
     private static final long serialVersionUID = 6800220370010527297L;
 
     /**
-     * @param view
+     * @param view the view instance associated with this frame
      */
     public ChatFrame(ChatView view) {
         super(view);

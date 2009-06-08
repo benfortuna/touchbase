@@ -33,9 +33,9 @@ public abstract class AbstractContactAction extends AbstractActionExt {
     private String contact;
 
     /**
-     * @param name
-     * @param command
-     * @param icon
+     * @param name the action name
+     * @param command the action identifier
+     * @param icon the action icon
      */
     public AbstractContactAction(String name, String command, Icon icon) {
         super(name, command, icon);

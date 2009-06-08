@@ -12,7 +12,7 @@ import org.mnode.base.views.icon.IconSet;
 
 /**
  * @author Ben
- *
+ * 
  */
 public class CallContact extends AbstractContactAction {
 
@@ -24,16 +24,18 @@ public class CallContact extends AbstractContactAction {
     private static final ImageIcon ICON = new ImageIcon(IconSet.class.getResource("/icons/liquidicity/call.png"));
 
     /**
-     * 
+     * @param id
+     *            the action identifier
      */
     public CallContact(String id) {
         super("Call", id, ICON);
-//        setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | InputEvent.SHIFT_DOWN_MASK));
+        // setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() |
+        // InputEvent.SHIFT_DOWN_MASK));
         ActionManager.getInstance().addAction(this);
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+    /**
+     * {@inheritDoc}
      */
     @Override
     public void actionPerformed(ActionEvent e) {

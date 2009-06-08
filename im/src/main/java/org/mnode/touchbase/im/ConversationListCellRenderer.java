@@ -44,12 +44,15 @@ public class ConversationListCellRenderer extends DefaultListCellRenderer {
     private Roster roster;
     
     /**
-     * @param connection
+     * @param roster a roster from an active XMPP connection
      */
     public ConversationListCellRenderer(Roster roster) {
         this.roster = roster;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Component getListCellRendererComponent(JList list, Object value,
             int index, boolean isSelected, boolean cellHasFocus) {

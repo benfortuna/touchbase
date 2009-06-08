@@ -76,6 +76,9 @@ public class IdleTime implements ConnectionCreationListener {
         XMPPConnection.addConnectionCreationListener(this);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void connectionCreated(XMPPConnection connection) {
         connections.add(connection);

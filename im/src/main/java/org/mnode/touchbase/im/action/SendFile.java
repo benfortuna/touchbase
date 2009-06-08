@@ -24,29 +24,30 @@ import org.mnode.touchbase.im.XMPPConnectionManager;
 
 /**
  * @author Ben
- *
+ * 
  */
 public class SendFile extends AbstractContactAction {
 
     private XMPPConnectionManager contactStore;
-    
+
     private JFileChooser sendFileChooser;
-    
+
     private Component parent;
-    
+
     private FileTransferManager ftm;
-    
+
     /**
      * 
      */
     private static final long serialVersionUID = -653913819015809588L;
 
     /**
-     * 
+     * @param id the action identifier
      */
     public SendFile(String id) {
         super("Send File..", id, null);
-        setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | InputEvent.SHIFT_DOWN_MASK));
+        setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
+                | InputEvent.SHIFT_DOWN_MASK));
         sendFileChooser = new JFileChooser();
         ActionManager.getInstance().addAction(this);
     }
@@ -59,37 +60,39 @@ public class SendFile extends AbstractContactAction {
     }
 
     /**
-     * @param contactStore the contactStore to set
+     * @param contactStore
+     *            the contactStore to set
      */
     public final void setContactStore(XMPPConnectionManager contactStore) {
         this.contactStore = contactStore;
         setEnabled(contactStore != null && super.isEnabled());
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+    /**
+     * {@inheritDoc}
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (sendFileChooser.showDialog(parent, "Send") == JFileChooser.APPROVE_OPTION) {
-            
+
             SwingWorker<String, Object> sendFileWorker = new SwingWorker<String, Object>() {
                 @Override
                 protected String doInBackground() throws Exception {
                     File selected = sendFileChooser.getSelectedFile();
-                    ProgressMonitor monitor = new ProgressMonitor(parent, "Transferring file [" + selected.getName() + "]", null, 0, 100);
+                    ProgressMonitor monitor = new ProgressMonitor(parent, "Transferring file [" + selected.getName()
+                            + "]", null, 0, 100);
                     XMPPConnection connection = contactStore.getConnection(getContact());
                     if (connection != null) {
                         FileTransferManager ftm = new FileTransferManager(connection);
                         OutgoingFileTransfer oft = ftm.createOutgoingFileTransfer(getContact());
-                        
+
                         try {
                             oft.sendFile(selected, selected.getName());
                         } catch (XMPPException e1) {
                             // TODO Auto-generated catch block
                             e1.printStackTrace();
                         }
-                        
+
                         while (!oft.isDone()) {
                             if (monitor.isCanceled()) {
                                 oft.cancel();
@@ -120,7 +123,8 @@ public class SendFile extends AbstractContactAction {
     }
 
     /**
-     * @param parent the parent to set
+     * @param parent
+     *            the parent to set
      */
     public final void setParent(Component parent) {
         this.parent = parent;

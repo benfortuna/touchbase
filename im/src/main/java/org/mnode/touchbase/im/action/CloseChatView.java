@@ -45,7 +45,7 @@ public class CloseChatView extends AbstractActionExt implements WindowListener {
     private ChatFrame chatFrame;
     
     /**
-     * 
+     * @param id the action identifier
      */
     public CloseChatView(String id) {
         super("Close", id);
@@ -55,8 +55,8 @@ public class CloseChatView extends AbstractActionExt implements WindowListener {
         ActionManager.getInstance().addAction(this);
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+    /**
+     * {@inheritDoc}
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -93,31 +93,52 @@ public class CloseChatView extends AbstractActionExt implements WindowListener {
         }
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowClosing(WindowEvent e) {
         closeFrame();
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowActivated(WindowEvent e) {
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowClosed(WindowEvent e) {
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowDeactivated(WindowEvent e) {
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowDeiconified(WindowEvent e) {
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowIconified(WindowEvent e) {
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowOpened(WindowEvent e) {
     }

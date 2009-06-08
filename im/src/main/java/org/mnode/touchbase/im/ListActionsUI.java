@@ -49,28 +49,29 @@ import org.mnode.touchbase.im.action.CallContact;
 
 /**
  * @author Ben
- *
+ * 
  */
 public class ListActionsUI extends AbstractLayerUI<JXList> {
 
     private List<Action> actions;
-    
+
     private JXPanel actionPane;
-    
+
     private int currentViewIndex;
-    
+
     private Timer showActionsTimer;
-    
+
     private TimerTask showActionsTask;
-    
+
     /**
-     * 
+     * @param actions
+     *            a list of actions applicable for the overlay
      */
     public ListActionsUI(List<Action> actions) {
         this.actions = actions;
-        
+
         actionPane = new JXPanel(new FlowLayout(FlowLayout.TRAILING));
-//        actionPane = Box.createHorizontalBox();
+        // actionPane = Box.createHorizontalBox();
         actionPane.setOpaque(false);
         actionPane.setAlpha(0.5f);
         actionPane.setBorder(null);
@@ -83,6 +84,7 @@ public class ListActionsUI extends AbstractLayerUI<JXList> {
                 public void mouseEntered(MouseEvent e) {
                     actionPane.setAlpha(1f);
                 }
+
                 @Override
                 public void mouseExited(MouseEvent e) {
                     actionPane.setAlpha(0.5f);
@@ -90,12 +92,15 @@ public class ListActionsUI extends AbstractLayerUI<JXList> {
             });
             actionPane.add(b);
         }
-//        actionPane.setSize(50, 30);
+        // actionPane.setSize(50, 30);
         actionPane.setVisible(false);
         currentViewIndex = -1;
         showActionsTimer = new Timer();
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void installUI(JComponent c) {
         super.installUI(c);
@@ -103,7 +108,10 @@ public class ListActionsUI extends AbstractLayerUI<JXList> {
         l.getGlassPane().setLayout(null);
         l.getGlassPane().add(actionPane);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void uninstallUI(JComponent c) {
         super.uninstallUI(c);
@@ -111,7 +119,10 @@ public class ListActionsUI extends AbstractLayerUI<JXList> {
         l.getGlassPane().setLayout(new FlowLayout());
         l.getGlassPane().remove(actionPane);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void processMouseEvent(MouseEvent e, JXLayer<JXList> l) {
         super.processMouseEvent(e, l);
@@ -127,7 +138,10 @@ public class ListActionsUI extends AbstractLayerUI<JXList> {
             }
         }
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void processMouseMotionEvent(MouseEvent e, final JXLayer<JXList> l) {
         super.processMouseMotionEvent(e, l);
@@ -143,7 +157,8 @@ public class ListActionsUI extends AbstractLayerUI<JXList> {
                     @Override
                     public void run() {
                         for (Action action : actions) {
-                            ((AbstractContactAction) action).setContact(((RosterEntry) l.getView().getElementAt(viewIndex)).getUser());
+                            ((AbstractContactAction) action).setContact(((RosterEntry) l.getView().getElementAt(
+                                    viewIndex)).getUser());
                         }
                         Rectangle cellBounds = l.getView().getCellBounds(viewIndex, viewIndex);
                         actionPane.setSize(cellBounds.width, cellBounds.height);
@@ -157,18 +172,18 @@ public class ListActionsUI extends AbstractLayerUI<JXList> {
         }
 
     }
-    
+
     /**
-     * @param args
+     * @param args command-line arguments
      */
     public static void main(String[] args) {
-        JXList list = new JXList(new Object[] {"1", "2", "3", "4", "5"});
-        
+        JXList list = new JXList(new Object[] { "1", "2", "3", "4", "5" });
+
         List<Action> actions = new ArrayList<Action>();
         actions.add(new CallContact("contactList.call"));
-        
+
         JXLayer<JXList> layer = new JXLayer<JXList>(list, new ListActionsUI(actions));
-        
+
         JXFrame f = new JXFrame(ListActionsUI.class.getSimpleName());
         f.setDefaultCloseOperation(JXFrame.EXIT_ON_CLOSE);
         f.add(layer);

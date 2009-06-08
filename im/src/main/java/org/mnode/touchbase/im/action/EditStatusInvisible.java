@@ -44,7 +44,7 @@ public class EditStatusInvisible extends AbstractStatusAction {
     private static final ImageIcon ICON = new ImageIcon(IconSet.class.getResource("/icons/liquidicity/invisible.png"));
     
     /**
-     * @param connection
+     * @param id the action identifier
      */
     public EditStatusInvisible(String id) {
         super("Invisible", id, ICON);
@@ -52,8 +52,8 @@ public class EditStatusInvisible extends AbstractStatusAction {
         setShortDescription("Invisible");
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+    /**
+     * {@inheritDoc}
      */
     @Override
     public void actionPerformed(ActionEvent e) {

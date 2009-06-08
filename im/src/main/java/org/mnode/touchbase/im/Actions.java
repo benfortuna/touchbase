@@ -29,11 +29,12 @@ import org.mnode.base.views.icon.LiquidicityIconSetFactory;
 
 /**
  * @author Ben
- *
+ * 
  */
 public final class Actions {
 
-	private static IconSet icons = AbstractIconSetFactory.getInstance(LiquidicityIconSetFactory.class.getName()).getDefaultIconSet();
+    private static IconSet icons = AbstractIconSetFactory.getInstance(LiquidicityIconSetFactory.class.getName())
+            .getDefaultIconSet();
 
     /**
      * Enforce static nature.
@@ -42,19 +43,19 @@ public final class Actions {
     }
 
     /**
-     * @param a1
-     * @param border
-     * @return
+     * @param a1 the button to configure
+     * @param border the border to apply to the button
+     * @return the configured button instance
      */
     public static AbstractButton configureSmallButton(AbstractButton a1, Border border) {
         return configureSmallButton(a1, null, border);
     }
-    
+
     /**
-     * @param a1
-     * @param iconKey
-     * @param border
-     * @return
+     * @param a1 the button to configure
+     * @param iconKey the key of the icon to apply to the button
+     * @param border the border to apply to the button
+     * @return the configured button instance
      */
     public static AbstractButton configureSmallButton(AbstractButton a1, String iconKey, Border border) {
         if (iconKey != null) {

@@ -32,19 +32,22 @@ import org.mnode.base.views.icon.IconSet;
 
 /**
  * @author Ben
- *
+ * 
  */
 public class ContactDetailsPane extends JXPanel {
 
-    private static final Icon DEFAULT_AVATAR = new ImageIcon(IconSet.class.getResource("/icons/liquidicity/avatar.png"));
-    
+    private static final Icon DEFAULT_AVATAR = new ImageIcon(
+            IconSet.class.getResource("/icons/liquidicity/avatar.png"));
+
     private VCardCache cardCache;
 
     /**
-     * 
+     * @param connection an active XMPP connection providing details of the specified user
+     * @param user the user to display details about
+     * @param cache a cache for vCard instances
      */
     public ContactDetailsPane(XMPPConnection connection, String user, VCardCache cache) {
-    	VCard card = cache.getVCard(connection, user);
+        VCard card = cache.getVCard(connection, user);
         String name = card.getFirstName();
         if (StringUtils.isEmpty(name)) {
             name = card.getEmailHome();
@@ -53,8 +56,7 @@ public class ContactDetailsPane extends JXPanel {
         JXLabel nameLabel = null;
         if (card.getAvatar() != null) {
             nameLabel = new JXLabel(name, new ImageIcon(card.getAvatar()), JXLabel.TRAILING);
-        }
-        else {
+        } else {
             nameLabel = new JXLabel(name, DEFAULT_AVATAR, JXLabel.TRAILING);
         }
         nameLabel.setFont(nameLabel.getFont().deriveFont(18f));

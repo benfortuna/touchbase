@@ -15,36 +15,36 @@ public class GroupsListModel implements ListModel {
     private XMPPConnectionManager store;
 
     /**
-     * @param store
+     * @param store a manager for active XMPP connections
      */
     public GroupsListModel(XMPPConnectionManager store) {
         this.store = store;
     }
     
-    /* (non-Javadoc)
-     * @see javax.swing.ListModel#addListDataListener(javax.swing.event.ListDataListener)
+    /**
+     * {@inheritDoc}
      */
     public void addListDataListener(ListDataListener arg0) {
         // TODO Auto-generated method stub
 
     }
 
-    /* (non-Javadoc)
-     * @see javax.swing.ListModel#getElementAt(int)
+    /**
+     * {@inheritDoc}
      */
     public Object getElementAt(int index) {
         return store.getGroups().get(index);
     }
 
-    /* (non-Javadoc)
-     * @see javax.swing.ListModel#getSize()
+    /**
+     * {@inheritDoc}
      */
     public int getSize() {
         return store.getGroups().size();
     }
 
-    /* (non-Javadoc)
-     * @see javax.swing.ListModel#removeListDataListener(javax.swing.event.ListDataListener)
+    /**
+     * {@inheritDoc}
      */
     public void removeListDataListener(ListDataListener arg0) {
         // TODO Auto-generated method stub

@@ -33,35 +33,38 @@ import org.jivesoftware.smack.XMPPConnection;
 
 /**
  * @author fortuna
- *
+ * 
  */
 public abstract class AbstractStatusAction extends AbstractActionExt implements ConnectionCreationListener {
 
-	private List<XMPPConnection> connections;
+    private List<XMPPConnection> connections;
 
-	/**
-	 * @param name
-	 * @param command
-	 * @param icon
-	 */
-	public AbstractStatusAction(String name, String command, Icon icon) {
-		super(name, command, icon);
-		connections = new ArrayList<XMPPConnection>();
+    /**
+     * @param name the action name
+     * @param command the action identifier
+     * @param icon the action icon
+     */
+    public AbstractStatusAction(String name, String command, Icon icon) {
+        super(name, command, icon);
+        connections = new ArrayList<XMPPConnection>();
         setEnabled(false);
         ActionManager.getInstance().addAction(this);
         XMPPConnection.addConnectionCreationListener(this);
-	}
+    }
 
-	@Override
-	public void connectionCreated(XMPPConnection connection) {
-		this.connections.add(connection);
-		setEnabled(!connections.isEmpty());
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void connectionCreated(XMPPConnection connection) {
+        this.connections.add(connection);
+        setEnabled(!connections.isEmpty());
+    }
 
-	/**
-	 * @return the connection
-	 */
-	public final List<XMPPConnection> getConnection() {
-		return connections;
-	}
+    /**
+     * @return the connection
+     */
+    public final List<XMPPConnection> getConnection() {
+        return connections;
+    }
 }

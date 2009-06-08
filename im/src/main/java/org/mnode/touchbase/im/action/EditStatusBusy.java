@@ -45,7 +45,7 @@ public class EditStatusBusy extends AbstractStatusAction {
     private static final ImageIcon ICON = new ImageIcon(IconSet.class.getResource("/icons/liquidicity/busy.png"));
     
     /**
-     * @param connection
+     * @param id the action identifier
      */
     public EditStatusBusy(String id) {
         super("Busy", id, ICON);
@@ -53,8 +53,8 @@ public class EditStatusBusy extends AbstractStatusAction {
         setShortDescription("Busy");
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+    /**
+     * {@inheritDoc}
      */
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -17,7 +17,7 @@ import org.mnode.touchbase.im.ChatFrame;
 
 /**
  * @author Ben
- *
+ * 
  */
 public class OpenChatView extends AbstractContactAction {
 
@@ -31,38 +31,28 @@ public class OpenChatView extends AbstractContactAction {
     private ChatFrame chatFrame;
 
     /**
-     * 
+     * @param id the action identifier
      */
     public OpenChatView(String id) {
         super("Chat", id, ICON);
-        setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | InputEvent.SHIFT_DOWN_MASK));
+        setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()
+                | InputEvent.SHIFT_DOWN_MASK));
         /*
-        chatFrame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                chatView.closeAllTabs();
-                chatFrame.setVisible(false);
-            }
-        });
-        chatFrame.addKeyListener(new KeyAdapter() {
-        	@Override
-        	public void keyPressed(KeyEvent e) {
-        		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    chatView.closeAllTabs();
-                    chatFrame.setVisible(false);
-        		}
-        	}
-        });
-        */
+         * chatFrame.addWindowListener(new WindowAdapter() {
+         * @Override public void windowClosing(WindowEvent e) { chatView.closeAllTabs(); chatFrame.setVisible(false); }
+         * }); chatFrame.addKeyListener(new KeyAdapter() {
+         * @Override public void keyPressed(KeyEvent e) { if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+         * chatView.closeAllTabs(); chatFrame.setVisible(false); } } });
+         */
         ActionManager.getInstance().addAction(this);
     }
 
-    /* (non-Javadoc)
-     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+    /**
+     * {@inheritDoc}
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-//	    chatFrame.openChat((XmppContact) getContact());
+        // chatFrame.openChat((XmppContact) getContact());
     }
 
     /**
@@ -73,7 +63,8 @@ public class OpenChatView extends AbstractContactAction {
     }
 
     /**
-     * @param chatFrame the chatFrame to set
+     * @param chatFrame
+     *            the chatFrame to set
      */
     public final void setChatFrame(ChatFrame chatFrame) {
         this.chatFrame = chatFrame;
