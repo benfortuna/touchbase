@@ -44,10 +44,14 @@ public class ChatFrameIntegrationTest extends AbstractConfigurableBundleCreatorT
 
     @Override
     protected final String[] getTestBundlesNames() {
-        return new String[] { "org.mnode.touchbase, im, 0.0.1-SNAPSHOT", "org.mnode.base, base-xmpp, 0.0.1-SNAPSHOT",
-                "org.mnode.base, base-views, 0.0.1-SNAPSHOT", "org.mnode.base, base-cache, 0.0.1-SNAPSHOT",
+        return new String[] { "org.mnode.touchbase, touchbase-im, 0.0.1-SNAPSHOT",
+                "org.mnode.base, base-xmpp, 0.0.1-SNAPSHOT",
+                "org.mnode.base, base-views, 0.0.1-SNAPSHOT",
+                "org.mnode.base, base-cache, 0.0.1-SNAPSHOT",
+                "org.mnode.base, base-commons, 0.0.1-SNAPSHOT",
                 "org.springframework, spring-context-support, 2.5.5",
-                "net.sourceforge.cglib, com.springsource.net.sf.cglib, 2.1.3", "commons-lang, commons-lang, 2.4" };
+                "net.sourceforge.cglib, com.springsource.net.sf.cglib, 2.1.3",
+                "commons-lang, commons-lang, 2.4" };
     }
 
     @Override
