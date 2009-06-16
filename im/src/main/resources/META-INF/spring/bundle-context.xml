@@ -101,6 +101,12 @@
         </property>
     </bean>
 
+
+    <bean name="CallContact" class="org.mnode.touchbase.im.action.CallContact">
+        <constructor-arg index="0">
+            <value>call</value>
+        </constructor-arg>
+    </bean>
     <bean name="ContactListCall" class="org.mnode.touchbase.im.action.CallContact">
         <constructor-arg index="0">
             <value>contactList.call</value>
@@ -117,7 +123,7 @@
 	</bean>
 	<bean name="IdleTime" class="org.mnode.touchbase.im.IdleTime" />
 	<bean name="ConnectionManager" class="org.mnode.touchbase.im.XMPPConnectionManager" />
-	<bean name="ContactsView" class="org.mnode.touchbase.im.ContactsView" depends-on="ContactDetails, ContactListCall">
+	<bean name="ContactsView" class="org.mnode.touchbase.im.ContactsView" depends-on="ContactDetails, ContactListCall, CallContact">
 		<constructor-arg index="0">
 			<ref bean="ConnectionManager" />
 		</constructor-arg>
