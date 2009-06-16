@@ -11,7 +11,7 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.springframework.osgi.test.AbstractConfigurableBundleCreatorTests;
 import org.springframework.osgi.test.platform.Platforms;
 
-public class ChatFrameTest extends AbstractConfigurableBundleCreatorTests {
+public class ChatFrameIntegrationTest extends AbstractConfigurableBundleCreatorTests {
 
     public void testGetChatFrame() throws XMPPException {
         try {
