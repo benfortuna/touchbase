@@ -5,9 +5,10 @@ import javax.swing.UIManager;
 import org.jdesktop.swingx.JXFrame;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
+import org.mnode.base.commons.OsgiServiceLocator;
+import org.mnode.base.commons.ServiceLocator;
 import org.mnode.touchbase.im.ChatFrame;
 import org.mnode.touchbase.im.ContactsView;
-import org.osgi.util.tracker.ServiceTracker;
 import org.springframework.osgi.test.AbstractConfigurableBundleCreatorTests;
 import org.springframework.osgi.test.platform.Platforms;
 
@@ -20,18 +21,23 @@ public class ChatFrameIntegrationTest extends AbstractConfigurableBundleCreatorT
             e.printStackTrace();
         }
 
-        ServiceTracker contactsViewTracker = new ServiceTracker(bundleContext, ContactsView.class.getName(), null);
-        contactsViewTracker.open();
-        ContactsView contactsView = (ContactsView) contactsViewTracker.getService();
+//        ServiceTracker contactsViewTracker = new ServiceTracker(bundleContext, ContactsView.class.getName(), null);
+//        contactsViewTracker.open();
+//        ContactsView contactsView = (ContactsView) contactsViewTracker.getService();
+        
+        ServiceLocator serviceLocator = new OsgiServiceLocator(bundleContext);
+        
+        ContactsView contactsView = serviceLocator.findService(ContactsView.class);
         assertNotNull(contactsView);
         JXFrame contactsFrame = new JXFrame("Contacts");
         contactsFrame.add(contactsView);
         contactsFrame.pack();
         contactsFrame.setVisible(true);
 
-        ServiceTracker chatFrameTracker = new ServiceTracker(bundleContext, ChatFrame.class.getName(), null);
-        chatFrameTracker.open();
-        ChatFrame chatFrame = (ChatFrame) chatFrameTracker.getService();
+//        ServiceTracker chatFrameTracker = new ServiceTracker(bundleContext, ChatFrame.class.getName(), null);
+//        chatFrameTracker.open();
+//        ChatFrame chatFrame = (ChatFrame) chatFrameTracker.getService();
+        ChatFrame chatFrame = serviceLocator.findService(ChatFrame.class);
         assertNotNull(chatFrame);
         chatFrame.setVisible(true);
 
