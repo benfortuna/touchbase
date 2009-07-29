@@ -32,6 +32,7 @@ public class ChatBootstrap implements ServiceListener{
     
     public ChatBootstrap(BundleContext context) {
         this.context = context
+        context.addServiceListener(this, "(objectClass=" + JFrame.class.getName() + ")");
     }
     
     /**

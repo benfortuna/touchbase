@@ -18,7 +18,7 @@
  */
 package org.mnode.touchbase.chat
 
-import org.osgi.framework.BundleActivatorimport java.util.Propertiesimport java.util.Listimport org.apache.felix.main.AutoActivatorimport org.apache.felix.framework.Feliximport org.osgi.framework.BundleContextimport javax.swing.JFrame
+import org.osgi.framework.BundleActivatorimport java.util.Propertiesimport java.util.Listimport org.apache.felix.main.AutoActivatorimport org.apache.felix.framework.Feliximport org.osgi.framework.BundleContext
 
 /**
  * @author fortuna
@@ -27,7 +27,7 @@ import org.osgi.framework.BundleActivatorimport java.util.Propertiesimport jav
 public class ChatMain implements BundleActivator {
 
      void start(final BundleContext context) throws Exception {
-         context.addServiceListener(new ChatBootstrap(context), "(objectClass=" + JFrame.class.getName() + ")");
+         new ChatBootstrap(context)
      }
 
      void stop(BundleContext arg0) throws Exception {
@@ -42,7 +42,7 @@ public class ChatMain implements BundleActivator {
         Properties config = new Properties();
         config.load(ChatMain.class.getResourceAsStream("/config.properties"));
 
-        List<BundleActivator> activators = new ArrayList<BundleActivator>();
+        List activators = new ArrayList();
         activators.add(new AutoActivator(config));
         activators.add(new ChatMain());
         
