@@ -36,6 +36,12 @@
   		<version>2.4</version>
   		<scope>provided</scope>
   	</dependency>
+  	<dependency>
+  		<groupId>org.mnode.base</groupId>
+  		<artifactId>base-commons</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<scope>provided</scope>
+  	</dependency>
   </dependencies>
   <scm>
   	<connection>scm:svn:http://svn.mnode.org/base/touchbase/trunk/im</connection>
