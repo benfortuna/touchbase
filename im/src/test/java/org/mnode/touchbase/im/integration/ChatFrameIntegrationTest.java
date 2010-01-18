@@ -5,8 +5,9 @@ import javax.swing.UIManager;
 import org.jdesktop.swingx.JXFrame;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
-import org.mnode.base.commons.OsgiServiceLocator;
+import org.mnode.base.commons.osgi.OsgiServiceLocator;
 import org.mnode.base.commons.ServiceLocator;
+import org.mnode.base.commons.ServiceNotAvailableException;
 import org.mnode.touchbase.im.ChatFrame;
 import org.mnode.touchbase.im.ContactsView;
 import org.springframework.osgi.test.AbstractConfigurableBundleCreatorTests;
@@ -14,7 +15,7 @@ import org.springframework.osgi.test.platform.Platforms;
 
 public class ChatFrameIntegrationTest extends AbstractConfigurableBundleCreatorTests {
 
-    public void testGetChatFrame() throws XMPPException {
+    public void testGetChatFrame() throws XMPPException, ServiceNotAvailableException {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {

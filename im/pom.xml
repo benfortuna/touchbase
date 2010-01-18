@@ -11,6 +11,16 @@
   	<groupId>org.mnode.base</groupId>
   	<version>0.0.1-SNAPSHOT</version>
   </parent>
+  <repositories>
+  	<repository>
+  		<id>micronode-snapshots</id>
+  		<name>Micronode Snapshots</name>
+  		<url>http://build.mnode.org/snapshots</url>
+  		<releases>
+  			<enabled>false</enabled>
+  		</releases>
+  	</repository>
+  </repositories>
   <dependencies>
   	<dependency>
   		<groupId>org.mnode.base</groupId>
